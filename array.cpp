@@ -1,11 +1,10 @@
 #include "array.h"
-#define SIZE 10
 #include <stdio.h>
 #include <stdlib.h>
 FILE * fptr;
 
 
-int FindMax(int tab[]){
+int FindMax(int tab[],int SIZE){
 
     int max = tab[1];
 
@@ -23,7 +22,7 @@ int FindMax(int tab[]){
 
 }
 
-int FindMin(int tab[]) {
+int FindMin(int tab[],int SIZE) {
 
     int min = tab[1];
 
@@ -41,7 +40,7 @@ int FindMin(int tab[]) {
 
 }
 
-float FindAverage(int tab[]) {
+float FindAverage(int tab[],int  SIZE) {
     int sum = 0;
     for (int i = 0; i < SIZE; ++i) {
         sum += tab[i];
@@ -49,19 +48,27 @@ float FindAverage(int tab[]) {
     float srednia = (float)sum / SIZE;
     return srednia;
 }
-void enterValue(int tab[]){
+void enterValue(int *SIZE){
+    printf("Podaj rozmiar tablicy: ");
+    scanf("%d", SIZE);
+    int *tab = (int *)malloc(*SIZE * sizeof(int));
+    if (tab == NULL) {
+        printf("Blad alokacji pamieci!\n");
+        exit(1);
+    }
     printf("wprowadz wartosci do tablicy:\n");
-    for (int i = 0; i < SIZE; ++i) {
+    for (int i = 0; i < *SIZE; ++i) {
         printf("tab[%d] = ", i);
         scanf("%d", &tab[i]);
     }
 }
-void printArray(int tab[]){
+void printArray(int tab[],int SIZE){
+
     for (int i = 0; i < SIZE; ++i) {
         printf("tab[%d] = %d\n", i, tab[i]);
     }
 }
-void enter(int tab[]){
+void enter(int tab[],int SIZE){
     fptr = fopen("tab.txt", "w+");
     if (fptr == 0)
     {
@@ -72,7 +79,7 @@ void enter(int tab[]){
     }
     fclose(fptr);
 }
-void read(int tab[]){
+void read(int tab[],int SIZE){
     fptr = fopen("tab.txt", "r+");
     fseek(fptr, 0, SEEK_SET);
     printf("Zapisana tabela:\n");

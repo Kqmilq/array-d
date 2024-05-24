@@ -1,5 +1,4 @@
 #include <iostream>
-#define SIZE 10
 #include <stdio.h>
 #include <stdlib.h>
 #include "array.h"
@@ -17,7 +16,7 @@ void menu(){
 
 int main(){
 
-    int tab[SIZE] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int *tab;
     int option = 0;
     int min;
     int max;
